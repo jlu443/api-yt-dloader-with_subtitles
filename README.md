@@ -25,7 +25,7 @@ This project is designed to simplify the process of interacting with YouTube con
 
 ## Usage
 1. Clone this repository: `git clone https://github.com/jlu443/api-yt-dloader-with_subtitles.git`
-2. Install the required libraries: `pip install flask yt_dlp`
+2. Install the required libraries: `pip install flask yt_dlp requests`
 3. Run the Flask application: `python main.py`
 4. Access the API endpoints using HTTP requests (e.g., POST requests in Postman).
 
