@@ -1,4 +1,4 @@
-# YouTube Video Downloader and Info API
+# YouTube Video Downloader API with Subtitle Support
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
