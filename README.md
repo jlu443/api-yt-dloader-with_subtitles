@@ -58,10 +58,10 @@ This project is designed to simplify the process of interacting with YouTube con
     ```
 
 ## Screenshots
-### Downloading a Video
+### Downloading a Video without Subtitles
 ![image](https://github.com/jlu443/api-yt-dloader-with_subtitles/blob/main/pictures/useCase1.png)
 
-### Downloading a Video without Subtitles
+### Downloading a Video with Subtitles
 ![image](https://github.com/jlu443/api-yt-dloader-with_subtitles/blob/main/pictures/useCase2.png)
 
 ### Retrieving Info
