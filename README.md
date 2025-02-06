@@ -59,10 +59,13 @@ This project is designed to simplify the process of interacting with YouTube con
 
 ## Screenshots
 ### Downloading a Video
-![image](https://github.com/zararashraf/youtube-video-downloader-api/assets/36181292/edad60c8-27fc-4ed0-8243-21ffc4cc16cc)
+![image](https://github.com/jlu443/api-yt-dloader-with_subtitles/blob/main/pictures/useCase1.png)
+
+### Downloading a Video without Subtitles
+![image](https://github.com/jlu443/api-yt-dloader-with_subtitles/blob/main/pictures/useCase2.png)
 
 ### Retrieving Info
-![image](https://github.com/zararashraf/youtube-video-downloader-api/assets/36181292/e0e3aeb3-fa97-41c7-9d89-971f2cda421e)
+![image](https://github.com/jlu443/api-yt-dloader-with_subtitles/blob/main/pictures/useCase3.png)
 
 
 ## Code Repository
