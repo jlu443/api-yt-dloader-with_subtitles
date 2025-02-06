@@ -20,8 +20,9 @@ This project is designed to simplify the process of interacting with YouTube con
 ## Libraries and Technologies Used
 - Python 3.x
 - Flask for building the API.
-- Pytube for interacting with YouTube content.
+- yt_dlp for interacting with YouTube content.
 - re for URL validation.
+- Requests for interaction with Youtube API
 
 ## Usage
 1. Clone this repository: `git clone https://github.com/jlu443/api-yt-dloader-with_subtitles.git`
