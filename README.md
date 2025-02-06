@@ -38,6 +38,7 @@ This project is designed to simplify the process of interacting with YouTube con
     ```json
     {
         "url": "https://www.youtube.com/watch?v=VIDEO_ID"
+        "subtitles": "true"
     }
     ```
 
@@ -48,6 +49,7 @@ This project is designed to simplify the process of interacting with YouTube con
     ```json
     {
         "url": "https://www.youtube.com/watch?v=VIDEO_ID"
+        "subtitles": true
     }
     ```
 
