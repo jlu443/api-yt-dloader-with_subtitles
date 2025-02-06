@@ -24,12 +24,15 @@ This project is designed to simplify the process of interacting with YouTube con
 - re for URL validation.
 
 ## Usage
-1. Clone this repository: `git clone https://github.com/zararashraf/youtube-video-downloader-api.git`
-2. Install the required libraries: `pip install flask pytube`
+1. Clone this repository: `git clone https://github.com/jlu443/api-yt-dloader-with_subtitles.git`
+2. Install the required libraries: `pip install flask yt_dlp`
 3. Run the Flask application: `python main.py`
 4. Access the API endpoints using HTTP requests (e.g., POST requests in Postman).
 
 ## API Endpoints
+
+### Subtitle Support
+- **Subtitles** This parameter is optional. Keep blank or write false to not need to download subtitles. 
 
 ### Download Video by Resolution
 - **Endpoint:** `/download/<resolution>`
@@ -62,7 +65,7 @@ This project is designed to simplify the process of interacting with YouTube con
 
 
 ## Code Repository
-You can access the source code for this project on [GitHub](https://github.com/zararashraf/youtube-video-downloader-api/blob/main/main.py).
+You can access the source code for this project on [GitHub](https://github.com/jlu443/api-yt-dloader-with_subtitles/blob/main/main.py).
 
 ## License
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). You are free to use, modify, and distribute the code while providing appropriate attribution.
