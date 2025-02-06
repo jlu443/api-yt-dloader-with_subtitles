@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import yt_dlp
 import re
+import requests
 
 app = Flask(__name__)
 
@@ -15,28 +16,56 @@ def download_video(url, resolution, subtitles=False):
         if subtitles:
             ydl_opts.update({
                 'writesubtitles': True,
-                'writeautomaticsub': True,
-                'subtitleslangs': ['en'],  # Change this to another language if needed
+                'writeautomaticsub': True,  # Fetch auto-generated subs too
+                'subtitleslangs': ['en'],
                 'subtitleformat': 'srt',
             })
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(url, download=True)
 
-            if subtitles and "requested_subtitles" in info_dict:
-                subtitle_info = info_dict["requested_subtitles"].get("en")
-                if subtitle_info:
-                    subtitle_file = subtitle_info["filepath"]
-                    try:
-                        with open(subtitle_file, "r", encoding="utf-8") as file:
-                            subtitle_content = file.read()
-                        return True, subtitle_content
-                    except FileNotFoundError:
-                        return True, "Subtitles not found, but video downloaded."
-            
-            return True, None
+            if not info_dict:  
+                return False, "Failed to retrieve video information."
+
+            subtitle_content = None
+
+            # 1️⃣ Check for manually uploaded subtitles
+            requested_subs = info_dict.get("requested_subtitles", {})
+            subtitle_info = requested_subs.get("en")
+
+            # 2️⃣ If no manual subtitles, check for automatic captions
+            if not subtitle_info:
+                    auto_subs = info_dict.get("automatic_captions", {})
+
+                    # Find any English variant in automatic captions (e.g., en, en-US, en-auto)
+                    english_variants = [lang for lang in auto_subs.keys() if lang.startswith("en")]
+
+                    if english_variants:
+                        subtitle_url = auto_subs[english_variants[0]][0].get("url")  # Extract first available English auto-caption URL
+                    if subtitle_url:
+                        response = requests.get(subtitle_url)
+                        if response.status_code == 200:
+                            subtitle_content = response.text  # Download the auto-generated captions
+                        else:
+                            subtitle_content = "Failed to download auto-generated subtitles."
+                    else:
+                        subtitle_content = "No English auto-captions available."
+
+
+            # 3️⃣ Read from manually downloaded subtitle file if available
+            if subtitle_info and isinstance(subtitle_info, dict) and "filepath" in subtitle_info:
+                try:
+                    with open(subtitle_info["filepath"], "r", encoding="utf-8") as file:
+                        subtitle_content = file.read()
+                except FileNotFoundError:
+                    subtitle_content = "Subtitles not found, but video downloaded."
+
+            return True, subtitle_content
+
     except Exception as e:
         return False, str(e)
+
+
 
 def get_video_info(url):
     try:
@@ -79,13 +108,19 @@ def download_by_resolution(resolution):
     success, subtitle_content = download_video(url, resolution, subtitles)
 
     if success:
-        response = {
-            "message": f"Video with resolution {resolution} downloaded successfully.",
-            "subtitles": subtitle_content if subtitles else "Subtitles not requested."
-        }
+        response = {"message": f"Video with resolution {resolution} downloaded successfully."}
+
+        # Handle subtitles explicitly
+        if subtitles:
+            if subtitle_content is None:
+                response["subtitles"] = "Subtitles not found."
+            else:
+                response["subtitles"] = subtitle_content
+        
         return jsonify(response), 200
     else:
         return jsonify({"error": subtitle_content}), 500
+
 
 @app.route('/video_info', methods=['POST'])
 def video_info():
