@@ -32,7 +32,8 @@ This project is designed to simplify the process of interacting with YouTube con
 ## API Endpoints
 
 ### Subtitle Support
-- **Subtitles:** This parameter is optional. Keep blank by not writing the "subtitles" field to not need to download subtitles. 
+- **Subtitles:** This parameter is optional. Keep blank by not writing the "subtitles" field to not need to download subtitles.
+- Writing "true", "false" or any type of string input will activate subtitles.
 
 ### Download Video by Resolution
 - **Endpoint:** `/download/<resolution>`
